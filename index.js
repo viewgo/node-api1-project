@@ -28,7 +28,7 @@ server.get("/api/users", (req, res) => {
 
 //GET USER BY ID
 server.get("/api/users/:id", (req, res) => {
-  const { id } = req.params;
+  const id = req.params.id;
   data
     .findById(id)
     .then(user => {
@@ -89,6 +89,37 @@ server.delete("/api/users/:id", (req, res) => {
       console.log("error on DELETE /users/:id", err);
       res.status(500).json({ error: "The user could not be removed" });
     });
+});
+
+server.put("/api/users/:id", (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+
+  if (!body.name || !body.bio) {
+    res
+      .status(400)
+      .json({ errorMessage: "Please provide name and bio for the user." });
+  } else {
+    data
+      .update(id, body)
+      .then(user => {
+        if (user) {
+          res.status(200).json({ message: "User updated successfully" });
+        } else {
+          res
+            .status(404)
+            .json({
+              message: "The user with the specified ID does not exist."
+            });
+        }
+      })
+      .catch(err => {
+        console.log("error on PUT /users/:id", err);
+        res
+          .status(500)
+          .json({ error: "The user information could not be modified." });
+      });
+  }
 });
 
 server.listen(port, () => console.log(`\n API running on port ${port} \n`));
