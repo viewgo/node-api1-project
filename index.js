@@ -1,11 +1,17 @@
 // implement your API here
 const express = require("express");
+const cors = require("cors");
 const server = express();
 const port = 8000;
 
 const data = require("./data/db.js");
 
+
 server.use(express.json());
+server.use(cors());
+
+
+
 
 server.get("/", (req, res) => {
   res.send("Hello World");
@@ -71,6 +77,7 @@ server.post("/api/users", (req, res) => {
   }
 });
 
+//DELETE USER BY ID
 server.delete("/api/users/:id", (req, res) => {
   const id = req.params.id;
 
@@ -91,6 +98,7 @@ server.delete("/api/users/:id", (req, res) => {
     });
 });
 
+//PUT USER BY ID
 server.put("/api/users/:id", (req, res) => {
   const id = req.params.id;
   const body = req.body;
