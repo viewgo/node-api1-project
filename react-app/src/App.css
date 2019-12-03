@@ -4,7 +4,6 @@
   text-align: center;
   display: flex;
   flex-flow: column;
-  justify-content: center;
   align-items: center;
 }
 
@@ -43,4 +42,27 @@
   cursor: pointer;
 
   color: red;
+}
+
+.form-input {
+  display: flex;
+  flex-flow: column;
+}
+
+.form-input input{
+  width: 200px;
+text-align: center;
+}
+.bio-input textarea{
+  width: 200px;
+  height: 100px;
+  text-align: center;
+}
+
+form button{
+  width: 200px;
+}
+
+form{
+  margin-top: 50px;
 }
